@@ -4,6 +4,28 @@ const port = 8080;
 
 const key = "free";
 
+// Menyimpan daftar endpoint
+const endpoints = [];
+
+// Middleware untuk mencatat semua endpoint
+app.use((req, res, next) => {
+  res.on("finish", () => {
+    if (!endpoints.some(e => e.method === req.method && e.endpoint === req.path)) {
+      endpoints.push({ method: req.method, endpoint: req.path });
+    }
+  });
+  next();
+});
+
+// ** Endpoint "/" untuk menampilkan daftar semua API **
+app.get("/", (req, res) => {
+  res.json({
+    message: "Daftar API yang tersedia",
+    endpoints
+  });
+});
+
+
 app.get('/api/attack', (req, res) => {
   try {
     const key = req.query.key;  
