@@ -2,7 +2,7 @@ const express = require('express');
 const app = express();
 const port = 8080;
 
-const key = "starpez";
+const key = "free";
 
 app.get('/api/attack', (req, res) => {
   try {
@@ -669,3 +669,4 @@ app.get('/api/attack', (req, res) => {
 app.listen(port, () => {
   console.log(`API StarPez Started To: ${port} port`);
 });
+;
